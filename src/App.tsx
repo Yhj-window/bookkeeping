@@ -39,7 +39,7 @@ setTotalDebtAndRepaid();
 
 function App() {
   const [isOpen , setOpen] = useState(false);
-  const [data, setData] = useState();
+  const [data, setData] = useState({} as ListItem);
   function open(){
     setOpen(!isOpen)
   }
@@ -68,7 +68,7 @@ function App() {
                 <span className={item.type === 2 ? "red" : "green"}>{item.money}</span>
               </div>
               <Button title={'修改'} onClick={()=> setItem(item)}>修改</Button>
-            </div>            
+            </div>
           </li>
         ))}
       </ul>

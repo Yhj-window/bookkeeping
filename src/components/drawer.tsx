@@ -1,21 +1,24 @@
 import "./drawer.css";
 
-export default function Drawer({ data, isOpen, setOpen }) {
+export default function Drawer({ data, isOpen, setOpen }:{data:object,isOpen: boolean,setOpen: React.Dispatch<React.SetStateAction<boolean>>}) {
   console.log("isOpen", isOpen);
   console.log("data", data);
   isOpen ? openDrawer() : "";
   function openDrawer() {
-    document.querySelector("#drawer")!.style.display = "block";
+    const drawer = document.getElementById("drawer");
+    if(drawer){
+      drawer.style.display = "block";
+    }
     const t = setTimeout(() => {
-      document.querySelector(".drawer_body")!.classList = "drawer_body tr";
+      document.querySelector(".drawer_body")!.className = "drawer_body tr";
       clearTimeout(t);
     }, 100);
   }
-  
+
   function closeDrawer() {
-    document.querySelector(".drawer_body")!.classList = "drawer_body";
+    document.querySelector(".drawer_body")!.className = "drawer_body";
     const t = setTimeout(() => {
-      document.querySelector("#drawer")!.style.display = "none";
+      document.getElementById("drawer")!.style.display = "none";
       clearTimeout(t);
       setOpen(false)
     }, 410);
