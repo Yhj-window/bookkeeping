@@ -1,5 +1,13 @@
-// import {useState} from 'react'
-
+import {useState} from 'react'
+import Button from "./components/button";
+import Drawer from "./components/drawer";
+interface ListItem{
+  id: number,
+  time: string,
+  use: string,
+  money: number,
+  type: number
+}
 const list = [
   {id: 0, time: "2023年5月11日", use: "买手机", money: 3000, type: 2},
   {id: 1, time: "2023年5月11日", use: "不明", money: 3000, type: 2},
@@ -16,7 +24,7 @@ let totalDebt = 0;
 //已还款
 let repaid = 0;
 
-function a() {
+function setTotalDebtAndRepaid() {
   list.forEach((item) => {
     if (item.type === 2) {
       totalDebt += item.money;
@@ -26,12 +34,24 @@ function a() {
     }
   })
 }
-a();
-function App() {
+setTotalDebtAndRepaid();
 
+
+function App() {
+  const [isOpen , setOpen] = useState(false);
+  const [data, setData] = useState();
+  function open(){
+    setOpen(!isOpen)
+  }
+  function setItem(item:ListItem){
+    console.log("item",item);
+    setData(item);
+    open();
+  }
   return (
     <div id="app">
       <h3 className="title">晗晗记账本</h3>
+      <button onClick={open}>按钮</button>
       <div className="summarize">
         <span>总欠款：{totalDebt}元</span>
         <span>已还款：{repaid}元</span>
@@ -42,12 +62,17 @@ function App() {
           <li className="li" key={item.id}>
             <div>时间：{item.time}</div>
             <div>用途：{item.use}</div>
-            <div>{item.type === 2 ? "借款" : "还款"}：
-              <span className={item.type === 2 ? "red" : "green"}>{item.money}</span>
-            </div>
+            <div className="d">
+              <div>
+                {item.type === 2 ? "借款" : "还款"}：
+                <span className={item.type === 2 ? "red" : "green"}>{item.money}</span>
+              </div>
+              <Button title={'修改'} onClick={()=> setItem(item)}>修改</Button>
+            </div>            
           </li>
         ))}
       </ul>
+      <Drawer data={data} isOpen={isOpen} setOpen={setOpen}></Drawer>
     </div>
   )
 }

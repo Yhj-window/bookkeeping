@@ -23,10 +23,10 @@ body{
     font-size: 18px;
 }
 .red{
-    color: red;
+    color: #f00;
 }
 .green{
-    color: green;
+    color: #0f0;
 }
 #app{
     width: 100%;
@@ -64,4 +64,9 @@ body{
 }
 #uu li div{
     margin: 5px 0;
+}
+.d{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

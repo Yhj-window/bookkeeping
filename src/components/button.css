@@ -1,0 +1,11 @@
+.parameButton{
+    box-sizing: border-box;
+    padding: 6px 15px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    outline: none;
+    border: 1px solid #409eff;
+    background: #409eff;
+    cursor: pointer;
+}
