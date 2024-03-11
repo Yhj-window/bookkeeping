@@ -1,8 +1,9 @@
 import "./drawer.css";
+import { ListItem } from "../types/index";
 
-export default function Drawer({ data, isOpen, setOpen }:{data:object,isOpen: boolean,setOpen: React.Dispatch<React.SetStateAction<boolean>>}) {
-  console.log("isOpen", isOpen);
-  console.log("data", data);
+export default function Drawer({ data, isOpen, setOpen }:{data:ListItem,isOpen: boolean,setOpen: React.Dispatch<React.SetStateAction<boolean>>}) {
+  // console.log("isOpen", isOpen);
+  // console.log("data", data);
   isOpen ? openDrawer() : "";
   function openDrawer() {
     const drawer = document.getElementById("drawer");
@@ -36,7 +37,7 @@ export default function Drawer({ data, isOpen, setOpen }:{data:object,isOpen: bo
               X
             </div>
           </div>
-          <div className="drawer_content">我是drawer的内容</div>
+          <div className="drawer_content">时间：{data.time}</div>
         </div>
       </div>
     </div>
