@@ -5,7 +5,7 @@ import Drawer from "./components/drawer";
 import { ListItem } from "./types/index";
 
 function getList(): Promise<ListItem[]> {
-  console.log("getList")
+  console.log("getList");
   return new Promise((resolve) => {
     const t = setTimeout(() => {
       resolve([
@@ -29,9 +29,11 @@ function App() {
   const [data, setData] = useState({} as ListItem);
   const [list, setList] = useState([] as ListItem[]);
   //总欠款
-  const [totalDebt, setTotalDebt] = useState(0);
+  // const [totalDebt, setTotalDebt] = useState(0);
+  let totalDebt = 0;
   //已还款
-  const [repaid, setRepaid] = useState(0);
+  // const [repaid, setRepaid] = useState(0);
+  let repaid = 0;
 
   useEffect(() => {
     getList().then((res: ListItem[]) => {
@@ -39,23 +41,36 @@ function App() {
     });
     return () => {
       setList([]);
-    }
+    };
   }, []);
-
-  useEffect(() => {
+  function setTotalDebtAndRepaid() {
+    if(list.length === 0) return;
+    totalDebt = 0;
+    repaid = 0;
     list.forEach((item) => {
       if (item.type === 2) {
-        setTotalDebt((totalDebt) => totalDebt + item.money);
+        totalDebt += item.money;
       }
       if (item.type === 1) {
-        setRepaid((repaid) => repaid + item.money);
+        repaid += item.money;
       }
     });
-    return () => {
-      setTotalDebt(0);
-      setRepaid(0);
-    }
-  }, [list]);
+  }
+  setTotalDebtAndRepaid();
+  // useEffect(() => {
+  //   list.forEach((item) => {
+  //     if (item.type === 2) {
+  //       setTotalDebt((totalDebt) => totalDebt + item.money);
+  //     }
+  //     if (item.type === 1) {
+  //       setRepaid((repaid) => repaid + item.money);
+  //     }
+  //   });
+  //   return () => {
+  //     setTotalDebt(0);
+  //     setRepaid(0);
+  //   }
+  // }, [list]);
   function open() {
     setOpen(!isOpen);
   }
@@ -67,7 +82,7 @@ function App() {
   return (
     <div id="app">
       <div className="header">
-        <h3 className="title">晗晗记账本</h3>
+        <h3 className="title text-blue-50">晗晗记账本</h3>
         <div className="summarize">
           <span>总欠款：{totalDebt}元</span>
           <span>已还款：{repaid}元</span>
@@ -99,8 +114,7 @@ function App() {
       {list.length <= 0 && (
         <div style={{ textAlign: "center" }}>No Content</div>
       )}
-
-      <Drawer data={data} isOpen={isOpen} setOpen={setOpen}></Drawer>
+      { isOpen && <Drawer data={data} isOpen={isOpen} setOpen={setOpen}></Drawer> }
     </div>
   );
 }

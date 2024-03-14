@@ -1,4 +1,4 @@
-import "./drawer.css";
+import "./drawer.scss";
 import { ListItem } from "../types/index";
 
 export default function Drawer({ data, isOpen, setOpen }:{data:ListItem,isOpen: boolean,setOpen: React.Dispatch<React.SetStateAction<boolean>>}) {
