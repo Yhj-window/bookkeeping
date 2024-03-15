@@ -1,4 +1,4 @@
-.parameButton{
+.primary_button{
     box-sizing: border-box;
     padding: 6px 15px;
     border-radius: 4px;
@@ -8,4 +8,10 @@
     border: 1px solid #409eff;
     background: #409eff;
     cursor: pointer;
+}
+.button{
+    font-size: 14px;
+}
+.button + .button{
+    margin-left: 20px;
 }

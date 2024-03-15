@@ -1,9 +1,13 @@
 import "./drawer.scss";
-import { ListItem } from "../types/index";
+import {ReactNode} from "react";
 
-export default function Drawer({ data, isOpen, setOpen }:{data:ListItem,isOpen: boolean,setOpen: React.Dispatch<React.SetStateAction<boolean>>}) {
+interface DrawerProp{
+  children: ReactNode,
+  isOpen: boolean,
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+export default function Drawer({ isOpen, setOpen,children }:DrawerProp) {
   // console.log("isOpen", isOpen);
-  // console.log("data", data);
   isOpen ? openDrawer() : "";
   function openDrawer() {
     const drawer = document.getElementById("drawer");
@@ -37,7 +41,7 @@ export default function Drawer({ data, isOpen, setOpen }:{data:ListItem,isOpen: 
               X
             </div>
           </div>
-          <div className="drawer_content">时间：{data.time}</div>
+          <div className="drawer_content">{children}</div>
         </div>
       </div>
     </div>

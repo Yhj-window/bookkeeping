@@ -1,0 +1,24 @@
+.form{
+  &:first-child{
+    margin: 0;
+  }
+}
+.form-item {
+  display: flex;
+  align-items: center;
+  margin: 0 0 18px 0;
+
+  .form-item_label {
+    color: #606266;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding-right: 20px;
+    height: 32px;
+    line-height: 32px;
+    text-align: right;
+  }
+
+  .form-item_content {
+    flex: 1;
+  }
+}

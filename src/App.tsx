@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Button from "./components/button";
 import Drawer from "./components/drawer";
-
+import Form from "./components/form.tsx";
+import FormItem from "./components/formItem.tsx";
+import Input from "./components/input.tsx";
 import { ListItem } from "./types/index";
 
 function getList(): Promise<ListItem[]> {
@@ -82,7 +84,7 @@ function App() {
   return (
     <div id="app">
       <div className="header">
-        <h3 className="title text-blue-50">晗晗记账本</h3>
+        <h3 className="title text-purple-400 font-bold">晗晗记账本</h3>
         <div className="summarize">
           <span>总欠款：{totalDebt}元</span>
           <span>已还款：{repaid}元</span>
@@ -102,7 +104,7 @@ function App() {
                     {item.money}
                   </span>
                 </div>
-                <Button title={"修改"} onClick={() => setItem(item)}>
+                <Button onClick={() => setItem(item)}>
                   修改
                 </Button>
               </div>
@@ -112,9 +114,28 @@ function App() {
       )}
 
       {list.length <= 0 && (
-        <div style={{ textAlign: "center" }}>No Content</div>
+        <div style={{textAlign: "center"}}>No Content</div>
       )}
-      { isOpen && <Drawer data={data} isOpen={isOpen} setOpen={setOpen}></Drawer> }
+      {isOpen && <Drawer isOpen={isOpen} setOpen={setOpen}>
+        <Form>
+          <FormItem label={'用途'} labelWidth={80}>
+            <Input defaultValue={data.use} placeholder="请输入内容" style={{width: '5.28rem'}}/>
+          </FormItem>
+          <FormItem label={'时间'} labelWidth={80}>
+            <Input defaultValue={data.time} placeholder="请输入内容" style={{width: '5.28rem'}}/>
+          </FormItem>
+          <FormItem label={'金额'} labelWidth={80}>
+            <Input defaultValue={String(data.money)} placeholder="请输入内容" style={{width: '5.28rem'}}/>
+          </FormItem>
+          <FormItem label={'类型'} labelWidth={80}>
+            <Input defaultValue={String(data.type)} placeholder="请输入内容" style={{width: '5.28rem'}}/>
+          </FormItem>
+          <div className={'mt-2 text-right'} style={{boxSizing:"border-box",padding:"0 0.98rem 0 0"}}>
+            <Button>取消</Button>
+            <Button>保存</Button>
+          </div>
+        </Form>
+      </Drawer>}
     </div>
   );
 }

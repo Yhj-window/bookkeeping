@@ -1,14 +1,12 @@
-import "./button.css";
+import "./button.scss";
 import { ReactNode } from "react";
 interface ModalRendererProps{
-    title: string,
     children: ReactNode,
-    onClick: React.MouseEventHandler<HTMLButtonElement>
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 function Button(props:ModalRendererProps){
-    // console.log("props", props)
     return (
-        <button className="parameButton" onClick={props.onClick}>{ props.children }</button>
+        <button className="primary_button button hover:bg-blue-600 hover:border-blue-600" onClick={props.onClick}>{ props.children }</button>
     )
 }
 
