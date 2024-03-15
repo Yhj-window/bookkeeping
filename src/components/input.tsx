@@ -8,10 +8,10 @@ interface InputProp {
 }
 
 export default function Input({defaultValue, style, placeholder}: InputProp) {
-  function inputFocus(e){
+  function inputFocus(e:any){
     e.target.parentNode.setAttribute("class","input_wrapper is-focus");
   }
-  function inputBlur(e){
+  function inputBlur(e:any){
     e.target.parentNode.setAttribute("class","input_wrapper");
   }
 
